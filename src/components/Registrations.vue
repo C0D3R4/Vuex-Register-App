@@ -14,19 +14,23 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex';
     export default {
-        props: ['registrations'],
         methods: {
             unregister(registration) {
-                this.$emit('userUnregistered', registration);
-            }
-        },
-        computed: {
-            total() {
-                return this.registrations.length;
-            }
+              this.$store.commit({
+                type: 'unregister',
+                userId: registration.userId
+              });
         }
-    }
+    },
+        computed: {
+            ...mapGetters({
+                registrations: 'registrations',
+                total: 'totalRegistrations'
+            })
+        }
+      }
 </script>
 
 <style scoped>

@@ -11,13 +11,16 @@
 
 <script>
     export default {
-        props: ['users'],
         methods: {
             registerUser(user) {
-                this.$emit('userRegistered', user);
-                user.registered = true;
+                this.$store.dispatch('register', user.id);
             }
-        }
+        },
+        computed: {
+          users() {
+              return this.$store.getters.unregisteredUsers;
+          }
+      }
     }
 </script>
 
